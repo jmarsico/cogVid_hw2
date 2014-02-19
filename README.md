@@ -1,13 +1,13 @@
 #Computer Vision on webcam
 
-openframeworks ofxCv 
+openframeworks && ofxCv 
 
 ###Built For
-Research for Cognitive Video Class
-Professor Yang Cai
-Electrical and Computer Engineering Department
-Carnegie Mellon University 2014
-Homework 2
+Research for Cognitive Video Class <br /> 
+Professor Yang Cai <br /> 
+Electrical and Computer Engineering Department <br /> 
+Carnegie Mellon University 2014 <br /> 
+Homework 2 <br /> 
 
 
 
