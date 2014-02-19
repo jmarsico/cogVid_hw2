@@ -36,6 +36,8 @@ public:
     ofxIntSlider maxArea;
     ofxIntSlider contourThresh;
     ofxIntSlider blurAmount;
+    ofxIntSlider erodeAmount;
+    ofxIntSlider learnTime;
     ofxButton reset;
     ofxPanel gui;
     

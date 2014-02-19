@@ -45,6 +45,8 @@ void testApp::setup() {
     gui.add(maxArea.setup("maxArea", 100, 101, 200));
     gui.add(contourThresh.setup("cThresh", 200, 20, 300));
     gui.add(blurAmount.setup("blur", 10, 1, 100));
+    gui.add(erodeAmount.setup("erode", 100, 25, 1000));
+    gui.add(learnTime.setup("learTime", 100, 25, 1000));
     gui.add(reset.setup("reset background"));
     
     gui.setPosition(650, 680);
@@ -64,7 +66,7 @@ void testApp::setup() {
 	// an object can move up to 32 pixels per frame
 	contourFinder.getTracker().setMaximumDistance(32);
     
-    background.setLearningTime(50);
+    
     background.setThresholdValue(200);
 
 	
@@ -85,6 +87,7 @@ void testApp::update() {
     contourFinder.setMaxAreaRadius(maxArea);
 	contourFinder.setThreshold(contourThresh);
     background.setThresholdValue(backgroundThresh);
+    background.setLearningTime(learnTime);
     
     if(reset)
     {
@@ -101,11 +104,11 @@ void testApp::update() {
     {
         grabFrame.resize(640, 480);
         
-        background.update(grabFrame, thresholded);
+        background.update(cam, thresholded);
         thresholded.update();
         
         blur(thresholded, blurAmount);
-        contourFinder.setThreshold(ofMap(mouseX, 0, ofGetWidth(), 0, 255));
+        erode(thresholded, 4);
         contourFinder.findContours(thresholded);
         ofLog() << "number contours: " << contourFinder.size();
     }
@@ -123,8 +126,8 @@ void testApp::draw() {
 	ofSetColor(255);
     
 	if(showLabels) {
-        grabFrame.draw(0,10); //draw the video from the ofImage
-        thresholded.draw(grabFrame.getWidth()+10, 10);  //draw the binary mask next to it
+        cam.draw(0,10); //draw the video from the ofImage
+        thresholded.draw(cam.getWidth()+10, 10);  //draw the binary mask next to it
         //grabber->draw(grabFrame.getWidth()+10, grabFrame.getHeight()+20);
 		
         
@@ -201,11 +204,7 @@ void testApp::draw() {
         reportStr
         << "press ' ' to show label viz" << endl
         << "threshold " << backgroundThresh << " move mouse" << endl
-        << "num blobs found " << contourFinder.size() << ", fps: " << ofGetFrameRate() << endl
-        << "width of IP feed: " << grabber->getWidth() << endl
-        << "height of IP feed: " << grabber->getHeight() << endl
-        << "IP cam framerate: " << grabber->getFrameRate() << endl
-        << "URL: " << grabber->getURI() << endl;
+        << "num blobs found " << contourFinder.size() << ", fps: " << ofGetFrameRate() << endl;
         ofDrawBitmapString(reportStr.str(), 20, 680);
     
     ofDrawBitmapString("Feed + Contour Tracking", 0, 500);
