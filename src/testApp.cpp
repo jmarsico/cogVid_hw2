@@ -1,32 +1,4 @@
-/*
- <streams>
- 
- <stream url="http://148.61.142.228/axis-cgi/mjpg/video.cgi?resolution=320x240"/>
- **<stream url="http://82.79.176.85:8081/axis-cgi/mjpg/video.cgi?resolution=320x240"/>
- <stream url="http://81.8.151.136:88/axis-cgi/mjpg/video.cgi?resolution=320x240"/>
- <stream url="http://216.8.159.21/axis-cgi/mjpg/video.cgi?resolution=320x240"/>
- **<stream url="http://kassertheatercam.montclair.edu/axis-cgi/mjpg/video.cgi?resolution=320x240"/>
- <stream url="http://213.77.33.2:8080/axis-cgi/mjpg/video.cgi?resolution=320x240"/>
- <stream url="http://81.20.148.158/anony/mjpg.cgi"/>
- <stream url="http://173.167.157.229/anony/mjpg.cgi"/>
- <stream url="http://67.181.87.150/anony/mjpg.cgi"/>
- <stream url="http://72.227.87.110/anony/mjpg.cgi"/>
- <stream url="http://69.205.126.54/anony/mjpg.cgi"/>
- <stream url="http://173.196.179.29/anony/mjpg.cgi"/>
- <stream url="http://208.105.17.62/anony/mjpg.cgi"/>
- <stream url="http://67.208.104.218/anony/mjpg.cgi"/>
- <stream url="http://212.42.63.190/anony/mjpg.cgi"/>
- <stream url="http://94.246.211.222/anony/mjpg.cgi"/>
- <stream url="http://213.251.201.196/anony/mjpg.cgi"/>
- <stream url="http://208.100.33.174/anony/mjpg.cgi"/>
- <stream url="http://85.186.35.67/anony/mjpg.cgi"/>
- <stream url="http://98.189.188.232/anony/mjpg.cgi"/>
- <stream url="http://209.119.5.4/anony/mjpg.cgi"/>
- <stream url="http://24.155.150.53/anony/mjpg.cgi"/>
- <stream url="http://98.235.174.112/anony/mjpg.cgi"/>
- <stream url="http://88.170.122.125/anony/mjpg.cgi"/>
- -->
- </streams>*/
+
 
 #include "testApp.h"
 
@@ -48,12 +20,18 @@ void testApp::setup() {
     gui.add(erodeAmount.setup("erode", 100, 25, 1000));
     gui.add(learnTime.setup("learTime", 100, 25, 1000));
     gui.add(reset.setup("reset background"));
+    gui.add(showLabels.setup("show Labels", true));
     
     gui.setPosition(650, 680);
-    thresholded.allocate(640, 480, OF_IMAGE_COLOR);
-	
     
-    cam.initGrabber(320, 240);
+    
+    
+    
+   // cam.initGrabber(320, 240);
+    movie.loadMovie("shopMall.mp4");
+    movie.play();
+    thresholded.allocate(movie.getWidth(), movie.getHeight(), OF_IMAGE_COLOR);
+
     
   
     
@@ -70,8 +48,7 @@ void testApp::setup() {
     background.setThresholdValue(200);
 
 	
-	showLabels = true;
-    
+
     
      
 }
@@ -96,22 +73,20 @@ void testApp::update() {
     
     
     
-    // update the cameras
-    cam.update();
     
-    //if it's a new frame, do some stuff
-    if(cam.isFrameNew())
-    {
-        grabFrame.resize(640, 480);
-        
-        background.update(cam, thresholded);
-        thresholded.update();
-        
-        blur(thresholded, blurAmount);
-        erode(thresholded, 4);
-        contourFinder.findContours(thresholded);
-        ofLog() << "number contours: " << contourFinder.size();
-    }
+        movie.update();
+        //if it's a new frame, do some stuff
+        if(movie.isFrameNew())
+        {
+            
+            background.update(movie, thresholded);
+            thresholded.update();
+            
+            blur(thresholded, blurAmount);
+            erode(thresholded, 4);
+            contourFinder.findContours(thresholded);
+            ofLog() << "number contours: " << contourFinder.size();
+        }
     
   
 }
@@ -125,10 +100,11 @@ void testApp::draw() {
 	RectTracker& tracker = contourFinder.getTracker();
 	ofSetColor(255);
     
+    ofScale(0.8, 0.8);
+    
 	if(showLabels) {
-        cam.draw(0,10); //draw the video from the ofImage
-        thresholded.draw(cam.getWidth()+10, 10);  //draw the binary mask next to it
-        //grabber->draw(grabFrame.getWidth()+10, grabFrame.getHeight()+20);
+       movie.draw(0, 10, movie.getWidth(), movie.getHeight());
+       thresholded.draw(movie.getWidth()+10, 10);  //draw the binary mask next to it
 		
         
         ofSetColor(0, 244, 0);
@@ -197,6 +173,7 @@ void testApp::draw() {
 		ofLine(j, 12, j, 16);
 	}
     
+    ofScale(1/0.8, 1/0.8);
     
     // finally, a report:
 	ofSetColor(0,255,0);
@@ -216,9 +193,7 @@ void testApp::draw() {
 
 //------------------------------------------------------------------------------
 void testApp::keyPressed(int key) {
-	if(key == ' ') {
-		showLabels = !showLabels;
-	}
+	
 }
 
 

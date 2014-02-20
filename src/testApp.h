@@ -19,16 +19,16 @@ public:
     
     //ofxCV declarations
 	float threshold;
-	//ofVideoPlayer movie;
 	ofxCv::ContourFinder contourFinder;
-	bool showLabels;
+	//bool showLabels;
     ofVideoGrabber cam;
+    ofVideoPlayer movie;
     
     ofxCv::RunningBackground background;
     ofImage thresholded;
     ofImage edge;
 
-    ofImage grabFrame;
+    //ofImage grabFrame;
     //int backgroundThresh;
     
     ofxIntSlider backgroundThresh;
@@ -39,6 +39,8 @@ public:
     ofxIntSlider erodeAmount;
     ofxIntSlider learnTime;
     ofxButton reset;
+    ofxToggle showLabels;
     ofxPanel gui;
+    
     
 };
