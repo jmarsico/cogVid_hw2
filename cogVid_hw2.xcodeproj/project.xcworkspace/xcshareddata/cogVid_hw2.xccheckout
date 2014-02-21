@@ -5,15 +5,15 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>BF0483E1-EE53-47BF-A9DB-62DFA3DC21FF</string>
+	<string>4A623B11-E2A9-4911-8C42-B01080523E05</string>
 	<key>IDESourceControlProjectName</key>
 	<string>cogVid_hw2</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>B044F392-9C74-467A-96DB-9FB62A1F3D51</key>
 		<string>https://github.com/kylemcdonald/ofxCv.git</string>
-		<key>E66255BC-B6C8-4080-81A9-5EA4B2DFBABF</key>
-		<string>https://github.com/jmarsico/cv_IPvideo.git</string>
+		<key>E0C6DB6E-B4C1-4B0C-8691-C07D9AA3EECC</key>
+		<string>https://github.com/jmarsico/cogVid_hw2.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>cogVid_hw2.xcodeproj/project.xcworkspace</string>
@@ -21,24 +21,24 @@
 	<dict>
 		<key>B044F392-9C74-467A-96DB-9FB62A1F3D51</key>
 		<string>../../../../../addons/ofxCv</string>
-		<key>E66255BC-B6C8-4080-81A9-5EA4B2DFBABF</key>
+		<key>E0C6DB6E-B4C1-4B0C-8691-C07D9AA3EECC</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/jmarsico/cv_IPvideo.git</string>
+	<string>https://github.com/jmarsico/cogVid_hw2.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>E66255BC-B6C8-4080-81A9-5EA4B2DFBABF</string>
+	<string>E0C6DB6E-B4C1-4B0C-8691-C07D9AA3EECC</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>E66255BC-B6C8-4080-81A9-5EA4B2DFBABF</string>
+			<string>E0C6DB6E-B4C1-4B0C-8691-C07D9AA3EECC</string>
 			<key>IDESourceControlWCCName</key>
-			<string>cv_IPvideo</string>
+			<string>cogVid_hw2</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>

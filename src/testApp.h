@@ -21,15 +21,14 @@ public:
 	float threshold;
 	ofxCv::ContourFinder contourFinder;
 	//bool showLabels;
-    ofVideoGrabber cam;
+    //ofVideoGrabber cam;
     ofVideoPlayer movie;
     
     ofxCv::RunningBackground background;
     ofImage thresholded;
-    ofImage edge;
+    ofImage tempImage;
+    ofImage beach;
 
-    //ofImage grabFrame;
-    //int backgroundThresh;
     
     ofxIntSlider backgroundThresh;
     ofxIntSlider minArea;
@@ -37,10 +36,15 @@ public:
     ofxIntSlider contourThresh;
     ofxIntSlider blurAmount;
     ofxIntSlider erodeAmount;
+    ofxIntSlider dilateAmount;
     ofxIntSlider learnTime;
     ofxButton reset;
     ofxToggle showLabels;
     ofxPanel gui;
+    
+    ofPolyline polyFromContour;
+    
+    ofPixels tempPix;
     
     
 };
